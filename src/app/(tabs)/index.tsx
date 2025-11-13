@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import MediaListItem from "@/components/MediaListItem";
+import mediaList from "@assets/data/mediaList.json";
 
 export default function HomeScreen() {
   return (
     <View>
-      <Text style={{ color: "white" }}>Home Screen</Text>
+      <MediaListItem mediaItem={mediaList[0]} />
+      <MediaListItem mediaItem={mediaList[1]} />
+      <MediaListItem mediaItem={mediaList[2]} />
     </View>
   );
 }
