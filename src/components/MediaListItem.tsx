@@ -1,15 +1,26 @@
-import { View, Text } from "react-native";
+import { MediaListData } from "@/types/types";
+import { Link } from "expo-router";
 import React from "react";
-import { MediaList } from "@/types/types";
+import { Image, Pressable } from "react-native";
 
 type MediaListItemProps = {
-  mediaItem: MediaList;
+  mediaItem: MediaListData;
 };
 
 export default function MediaListItem({ mediaItem }: MediaListItemProps) {
   return (
-    <View>
-      <Text style={{ color: "white" }}>{mediaItem?.title}</Text>
-    </View>
+    <Link href={`mediaDetails/${mediaItem.id}`} asChild>
+      <Pressable>
+        <Image
+          source={{ uri: mediaItem.image }}
+          style={{
+            width: 110,
+            aspectRatio: 3 / 4,
+            borderRadius: 5,
+            marginHorizontal: 4,
+          }}
+        />
+      </Pressable>
+    </Link>
   );
 }
