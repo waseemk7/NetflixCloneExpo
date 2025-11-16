@@ -4,6 +4,8 @@ import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import mediaDetailedList from "@assets/data/mediaDetailedList.json";
 import MediaInfo from "@/components/MediaDetails/MediaInfo";
+import { useVideoPlayer } from "expo-video";
+import MediaHeader from "@/components/MediaDetails/MediaHeader";
 
 export default function MediaDetails() {
   const { id } = useLocalSearchParams();
@@ -34,8 +36,18 @@ export default function MediaDetails() {
     return <Text>No playable video found.</Text>;
   }
 
+  const trailerPlayer = useVideoPlayer(trailer, (player) => {
+    player.currentTime = 10;
+    player.play();
+  });
+
+  const mediaPlayer = useVideoPlayer(videoSource, (player) => {
+    player.showNowPlayingNotification = true;
+  });
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <MediaHeader/>
       <MediaInfo
         title={title}
         releaseYear={releaseYear}
