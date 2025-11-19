@@ -1,5 +1,6 @@
 import React from "react";
 import { Stack } from "expo-router";
+import { PaperProvider } from "react-native-paper";
 import { ThemeProvider, DarkTheme } from "@react-navigation/native";
 
 export default function RootLayout() {
@@ -10,9 +11,19 @@ export default function RootLayout() {
       primary: "white",
     },
   };
+
   return (
     <ThemeProvider value={myTheme}>
-      <Stack />
+      <PaperProvider>
+        <Stack
+          screenOptions={{
+            contentStyle: { backgroundColor: "black" },
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="mediaDetails/[id]" />
+        </Stack>
+      </PaperProvider>
     </ThemeProvider>
   );
 }
