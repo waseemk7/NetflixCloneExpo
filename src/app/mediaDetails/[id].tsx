@@ -3,12 +3,14 @@ import { useLocalSearchParams } from "expo-router";
 import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import mediaDetailedList from "@assets/data/mediaDetailedList.json";
+import { useVideoPlayer, VideoView } from "expo-video";
+import { useRef } from "react";
 import MediaInfo from "@/components/MediaDetails/MediaInfo";
-import { useVideoPlayer } from "expo-video";
 import MediaHeader from "@/components/MediaDetails/MediaHeader";
 
 export default function MediaDetails() {
   const { id } = useLocalSearchParams();
+  const videoViewRef = useRef<VideoView | null>(null);
 
   const mediaItem = mediaDetailedList.find((media) => media.id === id);
 
@@ -45,9 +47,20 @@ export default function MediaDetails() {
     player.showNowPlayingNotification = true;
   });
 
+  const onPlayMediaPressed = () => {
+    trailerPlayer.pause();
+    videoViewRef.current?.enterFullscreen();
+    mediaPlayer.play();
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <MediaHeader/>
+      <MediaHeader
+        thumbnail={thumbnail}
+        trailerPlayer={trailerPlayer}
+        mediaPlayer={mediaPlayer}
+        videoViewRef={videoViewRef}
+      />
       <MediaInfo
         title={title}
         releaseYear={releaseYear}
@@ -56,6 +69,7 @@ export default function MediaDetails() {
         description={description}
         type={type}
         nrOfSeasons={seasons?.length}
+        onPlayMediaPressed={onPlayMediaPressed}
       />
     </SafeAreaView>
   );

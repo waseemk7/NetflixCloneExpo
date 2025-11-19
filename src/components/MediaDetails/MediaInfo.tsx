@@ -10,6 +10,7 @@ type MediaInfoProps = {
   description: string;
   type: string;
   nrOfSeasons?: number;
+  onPlayMediaPressed: (video?: string, episodeId?: string) => Promise<void>;
 };
 
 export default function MediaInfo(props: MediaInfoProps) {
@@ -21,6 +22,7 @@ export default function MediaInfo(props: MediaInfoProps) {
     description,
     type,
     nrOfSeasons,
+    onPlayMediaPressed,
   } = props;
 
   return (
@@ -34,10 +36,7 @@ export default function MediaInfo(props: MediaInfoProps) {
         </Text>
       </View>
 
-      <Pressable
-        style={styles.playButton}
-        onPress={() => console.log("Pressed")}
-      >
+      <Pressable style={styles.playButton} onPress={() => onPlayMediaPressed()}>
         <FontAwesome name="play" size={20} color="black" />
         <Text style={{ fontWeight: "600" }}>Play</Text>
       </Pressable>
