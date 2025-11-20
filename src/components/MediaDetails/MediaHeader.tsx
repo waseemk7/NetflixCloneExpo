@@ -23,7 +23,7 @@ export default function MediaHeader(props: MediaHeaderProps) {
   return (
     <View style={styles.container}>
       <AntDesign
-        name="closecircle"
+        name="close-circle"
         size={24}
         color="#3b3b3b"
         style={styles.closeIcon}
