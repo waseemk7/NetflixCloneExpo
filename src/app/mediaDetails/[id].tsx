@@ -9,7 +9,7 @@ import MediaHeader from "@/components/MediaDetails/MediaHeader";
 import { useEffect, useRef, useState } from "react";
 import SeasonSelector from "@/components/MediaDetails/SeasonSelector";
 import { Episode } from "@/types/types";
-import EpisodeListItem from "@/components/EpisodeListItem";
+import EpisodeListItem from "@/components/MediaDetails/EpisodeListItem";
 
 export default function MediaDetails() {
   const { id } = useLocalSearchParams();
